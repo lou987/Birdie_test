@@ -34,8 +34,12 @@ export const getCareRecipients = () => {
  */
 export const getEventsForRecipient = (id: String, limit: Number, offset: Number) => {
     return new Promise((resolve, reject) => {
-        con.query('select * from events where care_recipient_id LIKE ? limit ? offset ?', [id, limit, offset], (err, array) => {
+        con.query('select payload from events where care_recipient_id LIKE ? limit ? offset ?', [id, limit, offset], (err, array) => {
             if (err) reject(err)
+            array = array.reduce((acc: any, val: any) => {
+                acc.push(JSON.parse(val.payload));
+                return acc;
+            }, [])
             resolve(array)
         })
     })
@@ -60,8 +64,12 @@ export const getDatesForRecipient = (id: String): Promise<Array<String>> => {
  */
 export const getEventsForRecipientOnDate = (id: String, date: String): Promise<Array<any>> => {
     return new Promise((resolve, reject) => {
-        con.query('SELECT * FROM events where care_recipient_id LIKE ? and DATE(timestamp) = ?', [id, date], (err, array) => {
+        con.query('SELECT payload FROM events where care_recipient_id LIKE ? and DATE(timestamp) = ?', [id, date], (err, array) => {
             if (err) reject(err)
+            array = array.reduce((acc: any, val: any) => {
+                acc.push(JSON.parse(val.payload));
+                return acc;
+            }, [])
             resolve(array)
         })
     })
@@ -70,7 +78,7 @@ export const getEventsForRecipientOnDate = (id: String, date: String): Promise<A
  * get distinct event types  related to one care recipiant
  * @param id string
  */
-export const getEventTypesForRecipiant = (id: String): Promise<Array<String>> => {
+export const getEventTypesForRecipient = (id: String): Promise<Array<String>> => {
     return new Promise((resolve, reject) => {
         con.query('SELECT DISTINCT(event_type) as type FROM events where care_recipient_id LIKE ?', [id], (err, array) => {
             if (err) reject(err)
@@ -86,8 +94,12 @@ export const getEventTypesForRecipiant = (id: String): Promise<Array<String>> =>
  */
 export const getEventsForRecipientWithType = (id: String, type: String): Promise<Array<any>> => {
     return new Promise((resolve, reject) => {
-        con.query('SELECT * FROM events where care_recipient_id LIKE ? and event_type LIKE ?', [id, type], (err, array) => {
+        con.query('SELECT payload FROM events where care_recipient_id LIKE ? and event_type LIKE ?', [id, type], (err, array) => {
             if (err) reject(err)
+            array = array.reduce((acc: any, val: any) => {
+                acc.push(JSON.parse(val.payload));
+                return acc;
+            }, [])
             resolve(array)
         })
     })

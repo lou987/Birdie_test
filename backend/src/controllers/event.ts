@@ -5,7 +5,7 @@ import {
   getEventsForRecipient,
   getDatesForRecipient,
   getEventsForRecipientOnDate,
-  getEventTypesForRecipiant,
+  getEventTypesForRecipient,
   getEventsForRecipientWithType
 } from "../services/eventService";
 export const eventController = express.Router();
@@ -87,7 +87,7 @@ eventController.get('/recepient/:id/dates/:date', async (req, res) => {
 eventController.get('/recepient/:id/types', async (req, res) => {
   try {
     const id = req.params.id
-    res.send(await getEventTypesForRecipiant(id))
+    res.send(await getEventTypesForRecipient(id))
   } catch (error) {
     console.error(error)
     res.sendStatus(500)

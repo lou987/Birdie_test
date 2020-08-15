@@ -2,14 +2,23 @@ import * as React from 'react';
 import styled, { createGlobalStyle } from 'styled-components';
 import { RootState } from '@App/store/reducers';
 import { connect } from 'react-redux';
+import { Dispatch } from 'redux';
 
 import Title from '@App/components/Title';
 import Logo from '@App/components/Logo';
+import Table from '@App/components/Table';
+import TimeLine from '@App/components/TimeLine';
+import Graph from '@App/components/Graph';
+
 import SubTitle from '@App/components/SubTitle';
 
 const LogoUrl = require('../../assets/images/logo-birdie.svg');
 
 interface AppProps {
+
+}
+
+interface AppState {
 
 }
 
@@ -32,21 +41,30 @@ const AppContainer = styled.div`
   flex-direction: column;
 `;
 
-const App: React.FC<AppProps> = ({ ...props }) => {
-  return (
-    <>
-      <GlobalStyle />
-      <AppContainer>
-        <Logo src={LogoUrl} />
-        <Title>Welcome to the birdie test</Title>
-        <SubTitle>Best of luck!</SubTitle>
-      </AppContainer>
-    </>
-  );
-};
+class App extends React.Component<AppProps, AppState> {
+  public constructor(props: AppProps) {
+    super(props);
+  }
 
-const mapStateToProps = (state: RootState) => state;
+  public render() {
+    return (
+      <>
+        <GlobalStyle />
+        <AppContainer>
+          <Logo src={LogoUrl} />
+          <Table />
+          <TimeLine />
+          <Graph />
+          <Title>Welcome to the birdie test</Title>
+          <SubTitle>Best of luck!</SubTitle>
+        </AppContainer>
+      </>
+    );
+  }
+}
 
-// const mapDispatchToProps = (dispatch: Dispatch<RootState>) => { };
+const mapStateToProps = (state: RootState, ownProps: object) => { };
 
-export default connect(mapStateToProps)(App);
+const mapDispatchToProps = (dispatch: Dispatch<RootState>) => { };
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
