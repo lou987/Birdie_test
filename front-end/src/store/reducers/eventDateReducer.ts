@@ -1,7 +1,7 @@
-import initialState from './initialState';
 import types from '@App/constants/dispatchTypes';
+import initialState from './initialState';
 
-export default (state = initialState.eventDatesByRecipient, action: any) => {
+export default (state = initialState.dates, action: any) => {
     switch (action.type) {
         case types.GET_RECIPIENT_DATES_REQUEST: {
             return Object.assign({}, state, {

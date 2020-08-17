@@ -22,7 +22,4 @@ const types = {
     GET_EVENTS_RECIPIENT_BY_EVENT_TYPE_FAILURE: 'GET_EVENTS_RECIPIENT_BY_EVENT_TYPE_FAILURE'
 };
 
-
-
-
 export default types;

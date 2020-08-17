@@ -1,26 +1,18 @@
 import * as React from 'react';
-import { RootState } from '@App/store/reducers';
-import { Dispatch, bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
 
-interface ITimeLineProps {
+interface TimeLineProps {
 
 }
 
-interface ITimeLineState {
-    selectedRecipient: ''
-
+interface TimeLineState {
+    selectedRecipient: '';
 }
 
-class TimeLine extends React.Component<ITimeLineProps, ITimeLineState> {
-
-
+class TimeLine extends React.Component<TimeLineProps, TimeLineState> {
 
     componentDidMount() {
 
     }
-
-
 
     public render() {
         return (
@@ -31,14 +23,6 @@ class TimeLine extends React.Component<ITimeLineProps, ITimeLineState> {
     }
 }
 
-const mapStateToProps = (state: RootState, ownProps: object) => {
+// const mapDispatchToProps = (dispatch: Dispatch<RootState>) => bindActionCreators({}, dispatch);
 
-};
-
-const mapDispatchToProps = (dispatch: Dispatch<RootState>) => bindActionCreators({
-
-
-}, dispatch);
-
-
-export default connect(mapStateToProps, mapDispatchToProps)(TimeLine);
+export default TimeLine;

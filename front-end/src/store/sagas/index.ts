@@ -1,17 +1,40 @@
-import { takeEvery, all } from 'redux-saga/effects';
 import types from '@App/constants/dispatchTypes';
-import { getRecipientEventsSaga, getRecipientsSaga, getObservationRecipientByDate, getObservationRecipientByEventType } from '@App/store/sagas/eventRecipient'
-import { getRecipientDatesSaga } from '@App/store/sagas/dateRecipient'
+import { getRecipientDatesSaga } from '@App/store/sagas/dateRecipient';
+import {
+  getObservationRecipientByDate,
+  getObservationRecipientByEventType,
+  getRecipientEventsSaga,
+  getRecipientsSaga
+} from '@App/store/sagas/eventRecipient';
+import { Action } from 'redux';
+import { all, takeEvery } from 'redux-saga/effects';
 
+interface AppAction extends Action<any> {
+  payload: any | Array<any>
+}
 
 export function* initSaga() {
   yield all([
-    takeEvery(types.GET_RECIPIENT_EVENTS_REQUEST, getRecipientEventsSaga),
-    takeEvery(types.GET_RECIPIENTS_REQUEST, getRecipientsSaga),
-    takeEvery(types.GET_RECIPIENT_DATES_REQUEST, getRecipientDatesSaga),
-    takeEvery(types.GET_EVENTS_RECIPIENT_BY_DATE_REQUEST, getObservationRecipientByDate),
-    takeEvery(types.GET_EVENTS_RECIPIENT_BY_EVENT_TYPE_REQUEST, getObservationRecipientByEventType),
-
+    takeEvery<AppAction>(
+      types.GET_RECIPIENT_EVENTS_REQUEST,
+      ({ payload }) => getRecipientEventsSaga(payload)
+    ),
+    takeEvery<AppAction>(
+      types.GET_RECIPIENTS_REQUEST,
+      ({ }) => getRecipientsSaga()
+    ),
+    takeEvery<AppAction>(
+      types.GET_RECIPIENT_DATES_REQUEST,
+      ({ payload }) => getRecipientDatesSaga(payload)
+    ),
+    takeEvery<AppAction>(
+      types.GET_EVENTS_RECIPIENT_BY_DATE_REQUEST,
+      ({ payload }) => getObservationRecipientByDate(payload[0], payload[1])
+    ),
+    takeEvery<AppAction>(
+      types.GET_EVENTS_RECIPIENT_BY_EVENT_TYPE_REQUEST,
+      ({ payload }) => getObservationRecipientByEventType(payload[0], payload[1])
+    ),
   ]);
 }
 

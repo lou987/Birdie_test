@@ -1,10 +1,9 @@
 import types from '@App/constants/dispatchTypes';
 
-
 // Get event's recipient actions 
-export const getRecipientEvents = () => {
-    return { type: types.GET_RECIPIENT_EVENTS_REQUEST }
-}
+export const getRecipientEvents = (id: string) => {
+    return { type: types.GET_RECIPIENT_EVENTS_REQUEST, payload: id };
+};
 
 export const setRecipientEvents = (data: any) => {
     return {
@@ -36,8 +35,8 @@ export const errorRecipients = () => {
 }
 
 // Get Observation dates for one recipient
-export const getRecipientDates = () => {
-    return { type: types.GET_RECIPIENT_DATES_REQUEST }
+export const getRecipientDates = (id: string) => {
+    return { type: types.GET_RECIPIENT_DATES_REQUEST, payload: id }
 }
 
 export const setRecipientDates = (data: any) => {
@@ -85,7 +84,3 @@ export const errorObservationRecipientByEventType = () => {
         type: types.GET_EVENTS_RECIPIENT_BY_EVENT_TYPE_FAILURE,
     }
 }
-
-
-
-

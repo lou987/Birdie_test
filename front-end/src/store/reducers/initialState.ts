@@ -1,15 +1,20 @@
+
 export default {
-    event: {
+    events: {
         data: [],
         isFetching: false,
-        error: false
+        error: false,
+        recipient: '',
+        total: 0,
+        offset: 0,
+        limit: 10
     },
     recipients: {
         data: [],
         isFetching: false,
         error: false
     },
-    eventDatesByRecipient: {
+    dates: {
         data: [],
         isFetching: false,
         error: false

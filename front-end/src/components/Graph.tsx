@@ -1,17 +1,14 @@
-import * as React from 'react';
 import { RootState } from '@App/store/reducers';
-import { Dispatch, bindActionCreators } from 'redux';
+import * as React from 'react';
 import { connect } from 'react-redux';
-interface IGraphProps {
+interface GraphProps {
 
 }
 
-interface IGraphState {
-    selectedRecipient: ''
-
+interface GraphState {
+    selectedRecipient: '';
 }
-class Graph extends React.Component<IGraphProps, IGraphState> {
-
+class Graph extends React.Component<GraphProps, GraphState> {
 
     componentDidMount() {
 
@@ -29,11 +26,6 @@ const mapStateToProps = (state: RootState, ownProps: object) => {
 
 };
 
-const mapDispatchToProps = (dispatch: Dispatch<RootState>) => bindActionCreators({
+// const mapDispatchToProps = (dispatch: Dispatch<RootState>) => bindActionCreators({}, dispatch);
 
-
-}, dispatch);
-
-
-
-export default connect(mapStateToProps, mapDispatchToProps)(Graph);
+export default connect(mapStateToProps)(Graph);

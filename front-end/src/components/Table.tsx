@@ -1,41 +1,24 @@
-import * as React from 'react';
 import { RootState } from '@App/store/reducers';
-import { Dispatch, bindActionCreators } from 'redux';
+import * as React from 'react';
 import { connect } from 'react-redux';
-import { getRecipients } from '@App/store/actions';
 
-interface ITableProps {
-    getRecipients: Function;
-    recipients: {
-        data: Array<string>,
-        isFetching: boolean,
-        error: boolean
-    }
+interface TableProps {
 }
 
-interface ITableState {
-    selectedRecipient: ''
-
+interface TableState {
+    selectedRecipient: '';
 }
 
-class Table extends React.Component<ITableProps, ITableState>  {
+class Table extends React.Component<TableProps, TableState>  {
 
     componentDidMount() {
-        this.props.getRecipients();
     }
-
 
     _renderSelectRecipient = () => {
         return (
             <div>
                 <label>select a recipient please</label>
-                <select name="recipient" >
-                    {
-                        this.props.recipients.data.map(id => {
-                            <option key="{id}" value="{id}">{id}</option>
-                        })
-                    }
-                </select>
+
             </div>
         );
     }
@@ -53,13 +36,9 @@ class Table extends React.Component<ITableProps, ITableState>  {
 const mapStateToProps = (state: RootState, ownProps: object) => {
     return {
         recipients: state.recipients,
-    }
+    };
 };
 
-const mapDispatchToProps = (dispatch: Dispatch<RootState>) => bindActionCreators({
-    getRecipients,
+// const mapDispatchToProps = (dispatch: Dispatch<RootState>) => bindActionCreators({ getRecipients }, dispatch);
 
-}, dispatch);
-
-
-export default connect(mapStateToProps, mapDispatchToProps)(Table);
+export default connect(mapStateToProps)(Table);

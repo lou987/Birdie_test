@@ -1,5 +1,5 @@
-import initialState from './initialState';
 import types from '@App/constants/dispatchTypes';
+import initialState from './initialState';
 
 export default (state = initialState.recipients, action: any) => {
     switch (action.type) {
@@ -23,6 +23,6 @@ export default (state = initialState.recipients, action: any) => {
         }
 
         default:
-            return state
+            return state;
     }
 }

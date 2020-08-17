@@ -1,61 +1,26 @@
-import initialState from './initialState';
 import types from '@App/constants/dispatchTypes';
+import initialState from './initialState';
 
-export default (state = initialState.event, action: any) => {
+export default (state = initialState.events, action: any) => {
     switch (action.type) {
-        // Events By Recipient
+
         case types.GET_RECIPIENT_EVENTS_REQUEST: {
             return Object.assign({}, state, {
-                isFetching: true,
+                isFetching: action.payload !== state.recipient,
+                recipient: action.payload
             });
         }
         case types.GET_RECIPIENT_EVENTS_SUCCESS: {
             return Object.assign({}, state, {
                 isFetching: false,
                 data: action.payload.data,
+                total: action.payload.total > -1 ? action.payload.total : state.total,
+                limit: action.payload.limit,
+                offset: action.payload.offset,
                 error: false
             });
         }
         case types.GET_RECIPIENT_EVENTS_FAILURE: {
-            return Object.assign({}, state, {
-                isFetching: false,
-                error: true
-            });
-        }
-        // Get Event's Recipient by Date
-        case types.GET_EVENTS_RECIPIENT_BY_DATE_REQUEST: {
-            return Object.assign({}, state, {
-                isFetching: true,
-            });
-        }
-        case types.GET_EVENTS_RECIPIENT_BY_DATE_SUCCESS: {
-            return Object.assign({}, state, {
-                isFetching: false,
-                data: action.payload,
-                error: false
-            });
-        }
-        case types.GET_EVENTS_RECIPIENT_BY_DATE_FAILURE: {
-            return Object.assign({}, state, {
-                isFetching: false,
-                error: true
-            });
-        }
-
-        // Get Event's Recipient By Event-Type
-        case types.GET_EVENTS_RECIPIENT_BY_EVENT_TYPE_REQUEST: {
-            return Object.assign({}, state, {
-                isFetching: true,
-            });
-        }
-        case types.GET_EVENTS_RECIPIENT_BY_EVENT_TYPE_SUCCESS: {
-            return Object.assign({}, state, {
-                isFetching: false,
-                data: action.payload,
-                error: false
-            });
-        }
-        case types.GET_EVENTS_RECIPIENT_BY_EVENT_TYPE_FAILURE: {
             return Object.assign({}, state, {
                 isFetching: false,
                 error: true
